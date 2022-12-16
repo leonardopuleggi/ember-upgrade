@@ -5,6 +5,7 @@ import moment from 'moment';
 // This import is necessary to force Ember-auto-import to bring in timezone. Do not remove
 import 'moment-timezone';
 import { inject as service } from '@ember/service';
+import DS from 'ember-data';
 
 export default Component.extend({
     store: service(),
@@ -27,5 +28,7 @@ export default Component.extend({
         });
 
         let t = this.i18n.t('test');
+
+        const errorModel = DS.Errors.create();
     }
 });
