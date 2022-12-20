@@ -1,6 +1,13 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+let GitRepoInfo = require('git-repo-info');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const Dotenv = require('dotenv-webpack');
+
+const environment = process.env.EMBER_ENV;
+const IS_PROD = environment === 'production';
+const IS_DEV = environment === 'development';
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
@@ -10,6 +17,24 @@ module.exports = function (defaults) {
       includePaths: ['app/'],
       extension: 'scss'
     },
+    autoImport: {
+      insertScriptsAt: 'auto-import-scripts',
+      webpack: {
+        node: {
+          global: true
+        },
+        plugins: [
+          new Dotenv({
+            path: IS_PROD ? './.env.production' : './.env',
+            systemvars: false,
+          }),
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+          })
+        ],
+      },
+      externals: { jQuery: 'jQuery' },
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
