@@ -18,7 +18,8 @@ module.exports = function (defaults) {
       extension: 'scss'
     },
     autoImport: {
-      insertScriptsAt: 'auto-import-scripts',
+      // to reintroduce if needed
+      //insertScriptsAt: 'auto-import-scripts',
       webpack: {
         node: {
           global: true
