@@ -17,6 +17,12 @@ module.exports = function (defaults) {
       includePaths: ['app/'],
       extension: 'scss'
     },
+    fingerprint: {
+        enabled: true,
+        extensions: ['js', 'json', 'css'],
+        generateAssetMap: true,
+        exclude: ['chunks.json']
+    },
     autoImport: {
       // to reintroduce if needed
       //insertScriptsAt: 'auto-import-scripts',
